@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/trending_movies_24"
+        android:title="@string/Popular"
+        />
+
+    <item
+        android:id="@+id/nav_edit_users"
+        android:title="@string/Recommended"
+        android:icon="@drawable/baseline_movie_filter_24"
+        />
+    <item
+        android:id="@+id/nav_user_economy"
+        android:title="@string/Review"
+        android:icon="@drawable/rate_movies_24"
+
+        />
+</menu>
