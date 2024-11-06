@@ -71,24 +71,24 @@
 
 
         <TextView
-            android:id="@+id/overviewText"
+            android:id="@+id/randomOverviewText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/overview"
             android:layout_marginBottom="40dp"
-            app:layout_constraintStart_toStartOf="@id/nextBtn"
-            app:layout_constraintEnd_toStartOf="@id/nextBtn"
+            app:layout_constraintStart_toStartOf="@id/randomMovieBtn"
+            app:layout_constraintEnd_toStartOf="@id/randomMovieBtn"
             android:textColor="@android:color/white" />
 
 
         <Button
-            android:id="@+id/nextBtn"
+            android:id="@+id/randomMovieBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/randomize"
             android:textColor="@android:color/white"
             app:backgroundTint="@color/royal_blue"
-            app:layout_constraintStart_toEndOf="@id/overviewText" />
+            app:layout_constraintStart_toEndOf="@id/randomOverviewText" />
 
     </LinearLayout>
 

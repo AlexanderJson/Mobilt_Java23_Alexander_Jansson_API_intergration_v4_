@@ -48,35 +48,6 @@ class ReviewActivity : AppCompatActivity() {
         }
 
 
-        val bottomNavigatonView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigatonView.selectedItemId = R.id.nav_recommended
-
-        bottomNavigatonView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-
-                R.id.nav_trending -> {
-                    val intent = Intent(this, TrendingActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
-                    true
-                }
-                R.id.nav_recommended -> {
-                    val intent = Intent(this, RecommendedActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
-                    true
-                }
-
-                R.id.nav_rate -> {
-                    true
-                }
-
-                else -> {
-                    false
-                }
-            }
-        }
-
 
     }
 }

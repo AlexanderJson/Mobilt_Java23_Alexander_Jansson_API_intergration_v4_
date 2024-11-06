@@ -24,5 +24,9 @@ interface ApiInterface {
         @Query("api_key") apiKey: String
     ): MovieResponse
 
+    @GET("discover/movie")
+    suspend fun getDiscover(
+        @Query("api_key") apiKey: String
+    ): MovieResponse
 
 }

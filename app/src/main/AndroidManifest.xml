@@ -33,9 +33,6 @@
 
         </activity>
 
-        <activity android:name=".RecommendedActivity">
-
-        </activity>
     </application>
 
 </manifest>

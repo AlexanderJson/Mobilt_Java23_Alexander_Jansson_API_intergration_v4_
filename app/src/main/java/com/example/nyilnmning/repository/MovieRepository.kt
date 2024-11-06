@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class MovieRepository @Inject constructor(private val api: ApiInterface) {
-    private val apiKey = "b89807eb08b8124fbb7f608b7511d1a0";
+    private val apiKey = "b89807eb08b8124fbb7f608b7511d1a0"; //todo env
 
    suspend fun getPopularMovies(): Result<List<Movie>> {
        return withContext(Dispatchers.IO){
@@ -24,4 +24,15 @@ class MovieRepository @Inject constructor(private val api: ApiInterface) {
            }
        }
    }
+
+    suspend fun discoverMovies(): Result<List<Movie>> {
+        return withContext(Dispatchers.IO){
+            try {
+                val response = api.getPopular(apiKey)
+                Result.success(response.results)
+            } catch (e: Exception){
+                Result.failure(e)
+            }
+        }
+    }
 }

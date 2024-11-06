@@ -43,23 +43,23 @@ class TrendingActivity : AppCompatActivity() {
         println(message)
 
 
-//        val recyclerView = findViewById<RecyclerView>(R.id.transactionsRecyclerView)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
+        val recyclerView = findViewById<RecyclerView>(R.id.transactionsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-//       lifecycleScope.launch {
-//           val result = repository.getPopularMovies()
-//           result.onSuccess { movies ->
-//               for (movie in movies){
-//                   Log.d("Main", "Movie: ${movie.title}")
-//                   movieAdapter = PopularMoviesAdapterList(movies)
-//                   recyclerView.adapter = movieAdapter
-//               }
-//           }.onFailure { error ->
-//               Log.e("MainActivity", "Error: ${error.message}")
-//           }
-//       }
-//
-//
+       lifecycleScope.launch {
+           val result = repository.getPopularMovies()
+           result.onSuccess { movies ->
+               for (movie in movies){
+                   Log.d("Main", "Movie: ${movie.title}")
+                   movieAdapter = PopularMoviesAdapterList(movies)
+                   recyclerView.adapter = movieAdapter
+               }
+           }.onFailure { error ->
+               Log.e("MainActivity", "Error: ${error.message}")
+           }
+       }
+
+
 
 
 
@@ -69,34 +69,6 @@ class TrendingActivity : AppCompatActivity() {
             insets
         }
 
-
-        val bottomNavigatonView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigatonView.selectedItemId = R.id.nav_rate
-
-        bottomNavigatonView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-
-                R.id.nav_trending-> {
-
-                    true
-                }
-                R.id.nav_recommended -> {
-                    val intent = Intent(this, RecommendedActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
-                    true
-                }
-                R.id.nav_rate -> {
-                    true
-                }
-                else -> {
-                    val intent = Intent(this, ReviewActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
-                    false
-                }
-            }
-        }
 
 
     }
