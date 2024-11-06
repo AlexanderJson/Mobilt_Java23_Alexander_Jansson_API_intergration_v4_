@@ -2,4 +2,5 @@
 <resources>
     <item name="nav_popularMovies" type="id" />
     <item name="nav_randomMovie" type="id" />
+    <item name="nav_searchMovie" type="id"/>
 </resources>

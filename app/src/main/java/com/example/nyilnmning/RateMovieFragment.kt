@@ -51,11 +51,12 @@ class RateMovieFragment :  Fragment() {
 
         val likeBtn = view.findViewById<Button>(R.id.likeBtn)
         likeBtn.setOnClickListener{
-            getTrending(view)
+            positiveReview()
         }
+
         val dislikeBtn = view.findViewById<Button>(R.id.dislikeBtn)
         dislikeBtn.setOnClickListener{
-
+            negativeReview()
         }
 
 
@@ -63,8 +64,36 @@ class RateMovieFragment :  Fragment() {
 
 
     }
-    private fun reviewMovie(view: View){
+    private fun positiveReview(){
+
+    }
+    private fun negativeReview(){
 
     }
 
+    private fun randomMovie(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            val title = view?.findViewById<TextView>(R.id.titleHeader)
+            val synopsis = view?.findViewById<TextView>(R.id.randomOverviewText)
+            val result = service.getRandomMovie()
+            result.onSuccess { movie ->
+                Log.d("Main", "Movie: ${movie.title}")
+                if (title != null) {
+                    title.text = movie.title
+                }
+                if (synopsis != null) {
+                    synopsis.text = movie.overview
+                }
+                val url = "https://image.tmdb.org/t/p/w500${movie.poster_path}"
+                view?.let {
+                    Glide.with(this@RateMovieFragment)
+                        .load(url)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_background)
+                        .into(it.findViewById(R.id.graphImage))
+                }
+            }
+        }
+
+    }
 }

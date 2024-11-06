@@ -16,5 +16,6 @@
     <string name="random">Random</string>
     <string name="disliked">Dislike</string>
     <string name="movie">Movie</string>
+    <string name="Search">Search movie</string>
 
 </resources>

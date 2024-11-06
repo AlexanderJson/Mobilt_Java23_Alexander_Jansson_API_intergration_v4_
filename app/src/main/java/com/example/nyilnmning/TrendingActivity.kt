@@ -1,27 +1,21 @@
-//package com.example.nyilnmning
-//
-//import android.annotation.SuppressLint
-//import android.content.Intent
-//import android.os.Bundle
-//import android.util.Log
-//import androidx.activity.enableEdgeToEdge
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.core.view.ViewCompat
-//import androidx.core.view.WindowInsetsCompat
-//import androidx.lifecycle.lifecycleScope
-//import androidx.recyclerview.widget.LinearLayoutManager
-//import androidx.recyclerview.widget.RecyclerView
-//import com.example.nyilnmning.repository.MovieRepository
-//import com.example.nyilnmning.service.DisplayService
-//import com.example.nyilnmning.view.PopularMoviesAdapterList
-//import com.example.nyilnmning.viewmodel.TrendingViewModel
-//import com.google.android.material.bottomnavigation.BottomNavigationView
-//import dagger.hilt.android.AndroidEntryPoint
-//import kotlinx.coroutines.CoroutineScope
-//import kotlinx.coroutines.Dispatchers
-//import kotlinx.coroutines.launch
-//import javax.inject.Inject
-//
+package com.example.nyilnmning
+
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.util.Log
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.nyilnmning.repository.MovieRepository
+import com.example.nyilnmning.view.PopularMoviesAdapterList
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
 //@AndroidEntryPoint
 //class TrendingActivity : AppCompatActivity() {
 //

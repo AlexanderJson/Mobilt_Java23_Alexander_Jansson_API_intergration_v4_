@@ -50,7 +50,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation ("com.github.bumptech.glide:glide:4.12.0")
-
+    implementation (libs.androidx.appcompat)
+    implementation (libs.androidx.constraintlayout.v214)
+    implementation (libs.material)
     // Dagger dependencies
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)

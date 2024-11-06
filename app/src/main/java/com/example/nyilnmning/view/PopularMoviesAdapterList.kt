@@ -9,7 +9,7 @@ import com.example.nyilnmning.R
 import com.example.nyilnmning.model.Movie
 
 
-class PopularMoviesAdapterList(private val movieList: List<Movie>) : RecyclerView.Adapter<PopularMoviesAdapterList.MovieViewHolder>() {
+class PopularMoviesAdapterList(private var movieList: List<Movie>) : RecyclerView.Adapter<PopularMoviesAdapterList.MovieViewHolder>() {
 
     // hämtar och sätter alla itemViews med default värden
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,5 +38,10 @@ class PopularMoviesAdapterList(private val movieList: List<Movie>) : RecyclerVie
     // storlek på lista
     override fun getItemCount(): Int {
         return movieList.size
+    }
+
+    fun updateMovies(newMovies: List<Movie>){
+        movieList = newMovies
+        notifyDataSetChanged()
     }
 }

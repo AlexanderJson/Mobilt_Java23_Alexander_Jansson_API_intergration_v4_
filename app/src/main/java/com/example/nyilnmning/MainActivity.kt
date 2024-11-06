@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
@@ -53,6 +54,13 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.nav_reviewMovie -> {
                 val fragment = RateMovieFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit()
+                true
+            }    R.id.nav_searchMovie -> {
+                val fragment = SearchMoviesFragment()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
                     .addToBackStack(null)
