@@ -24,6 +24,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".TrendingActivity">
+
+        </activity>
+
+        <activity android:name=".ReviewActivity">
+
+        </activity>
+
+        <activity android:name=".RecommendedActivity">
+
+        </activity>
     </application>
 
 </manifest>

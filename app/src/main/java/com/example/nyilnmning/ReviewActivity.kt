@@ -22,13 +22,24 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class ReviewActivity : AppCompatActivity() {
+
+
+
+    @Inject
+    lateinit var repository: MovieRepository
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+
+
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -38,12 +49,15 @@ class MainActivity : AppCompatActivity() {
 
 
         val bottomNavigatonView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigatonView.selectedItemId = R.id.nav_trending
+        bottomNavigatonView.selectedItemId = R.id.nav_recommended
 
         bottomNavigatonView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
 
                 R.id.nav_trending -> {
+                    val intent = Intent(this, TrendingActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                    startActivity(intent)
                     true
                 }
                 R.id.nav_recommended -> {
@@ -54,9 +68,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_rate -> {
-                    val intent = Intent(this, ReviewActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
                     true
                 }
 
@@ -65,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
 
     }
 }

@@ -5,18 +5,18 @@
 
 
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_trending"
         android:icon="@drawable/trending_movies_24"
         android:title="@string/Popular"
         />
 
     <item
-        android:id="@+id/nav_edit_users"
+        android:id="@+id/nav_recommended"
         android:title="@string/Recommended"
         android:icon="@drawable/baseline_movie_filter_24"
         />
     <item
-        android:id="@+id/nav_user_economy"
+        android:id="@+id/nav_rate"
         android:title="@string/Review"
         android:icon="@drawable/rate_movies_24"
 

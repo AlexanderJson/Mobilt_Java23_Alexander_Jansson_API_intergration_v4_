@@ -24,18 +24,3 @@ class TrendingViewModel @Inject constructor(private val repo: MovieRepository) :
     }
 }
 
-
-
-
-/*
-    private val transactionLiveData = MutableLiveData<List<Transaction>?>()
-    val transactions: MutableLiveData<List<Transaction>?> get() = transactionLiveData
-
-    fun getTransactions(context: Context){
-        viewModelScope.launch {
-            val fetchedTransactions = transactionService.getTransaction()
-            transactionLiveData.value = fetchedTransactions
-
-        }
-    }
-*/

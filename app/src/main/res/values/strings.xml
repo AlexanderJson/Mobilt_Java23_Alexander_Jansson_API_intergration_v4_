@@ -12,5 +12,6 @@
     <string name="Review">Rate</string>
     <string name="Synopsis">Synopsis</string>
     <string name="default_button">deault</string>
+    <string name="randomize">Next movie</string>
 
 </resources>

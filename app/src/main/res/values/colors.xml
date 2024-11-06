@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="royal_blue">#3E3DF4</color>
-    <color name="card_layout_color">#3E3DF4</color>
-    <color name="background_layer_2">#F0EFF4</color>
-    <color name="background_color">#FFFFFF</color>
-    <color name="font_color_active">#353333</color>
-    <color name="font_color_inactive">#B4B4B5</color>
+    <color name="royal_blue">#9B2915</color>
+    <color name="card_layout_color">#9B2915</color>
+    <color name="background_layer_2">#1C110A</color>
+    <color name="background_color">#1C110A</color>
+    <color name="font_color_active">#E9B44C</color>
+    <color name="font_color_inactive">#E4D6A7</color>
 </resources>
