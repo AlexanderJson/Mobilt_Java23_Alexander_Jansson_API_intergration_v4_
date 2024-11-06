@@ -14,5 +14,7 @@
     <string name="default_button">deault</string>
     <string name="randomize">Next movie</string>
     <string name="random">Random</string>
+    <string name="disliked">Dislike</string>
+    <string name="movie">Movie</string>
 
 </resources>

@@ -36,7 +36,7 @@ class RateMovieFragment :  Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_random_movie, container, false)
+        return inflater.inflate(R.layout.fragment_movie_controller, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,44 +49,21 @@ class RateMovieFragment :  Fragment() {
 
 
 
-        val nextBtn = view.findViewById<Button>(R.id.nextBtn)
-        nextBtn.setOnClickListener{
+        val likeBtn = view.findViewById<Button>(R.id.likeBtn)
+        likeBtn.setOnClickListener{
             getTrending(view)
         }
+        val dislikeBtn = view.findViewById<Button>(R.id.dislikeBtn)
+        dislikeBtn.setOnClickListener{
 
+        }
 
 
 
 
 
     }
-    private fun getTrending(view: View){
-
-        val title = view.findViewById<TextView>(R.id.titleHeader)
-        val synopsis = view.findViewById<TextView>(R.id.randomOverviewText)
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            val result = service.trendingMovies()
-            result.onSuccess { movies ->
-                for (movie in movies){
-                    title?.text = movie.title
-                    synopsis?.text = movie.overview
-
-                    val url = "https://image.tmdb.org/t/p/w500${movie.poster_path}"
-                    view.let {
-                        Glide.with(this@RateMovieFragment)
-                            .load(url)
-                            .placeholder(R.drawable.ic_launcher_background)
-                            .error(R.drawable.ic_launcher_background)
-                            .into(it.findViewById(R.id.graphImage))
-                    }
-                }
-            }.onFailure { error ->
-                Log.e("MainActivity", "Error: ${error.message}")
-            }
-        }
-
-
+    private fun reviewMovie(view: View){
 
     }
 
