@@ -1,11 +1,14 @@
 package com.example.nyilnmning.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nyilnmning.R
+import com.example.nyilnmning.model.Genre
 import com.example.nyilnmning.model.Movie
 
 
@@ -15,8 +18,8 @@ class PopularMoviesAdapterList(private var movieList: List<Movie>) : RecyclerVie
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.label_title)
         val overview: TextView = itemView.findViewById(R.id.label_overview)
-        val runtime: TextView = itemView.findViewById(R.id.label_runtime)
         val genre: TextView = itemView.findViewById(R.id.label_genre)
+        val addButton: ImageButton = itemView.findViewById(R.id.addMovie)
     }
 
 
@@ -31,8 +34,11 @@ class PopularMoviesAdapterList(private var movieList: List<Movie>) : RecyclerVie
         val movie = movieList[position]
         holder.title.text = movie.title
         holder.overview.text = movie.overview
-        holder.runtime.text = movie.runtime.toString()
-        holder.genre.text = movie.genre_ids.toString()
+        holder.genre.text = Genre.genreToString(movie.genre_ids)
+
+        holder.addButton.setOnClickListener {
+            Log.d("HOLDER:", movie.title)
+        }
     }
 
     // storlek på lista

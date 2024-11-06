@@ -30,9 +30,12 @@ interface ApiInterface {
         @Query("query") query: String? = null,
         @Query("sort_by") sortBy: String? = null,
         @Query("with_genres") genres: String? = null,
+    ): MovieResponse
 
-
-
+    @GET("search/movie")
+    suspend fun searchMovie(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String
     ): MovieResponse
 
 }

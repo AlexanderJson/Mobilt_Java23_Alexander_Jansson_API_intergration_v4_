@@ -14,7 +14,7 @@ import kotlin.math.log
 @Singleton
 class DisplayService @Inject constructor(private val repo: MovieRepository) {
 
-    suspend fun discoverMovies(): Result<List<Movie>> {
+    private suspend fun discoverMovies(): Result<List<Movie>> {
         return withContext(Dispatchers.IO){
             try {
                 val response = repo.discoverMovies()
@@ -35,6 +35,16 @@ class DisplayService @Inject constructor(private val repo: MovieRepository) {
         }
     }
 
+    suspend fun searchMovie(query: String): Result<List<Movie>>{
+        return withContext(Dispatchers.IO){
+            try {
+                val response = repo.searchMovie(query)
+                Result.success(response.getOrNull() ?: emptyList())
+            } catch (e: Exception){
+                Result.failure(e)
+            }
+        }
+    }
 
     suspend fun getRandomMovie(): Result<Movie> {
         return withContext(Dispatchers.IO){
@@ -43,7 +53,6 @@ class DisplayService @Inject constructor(private val repo: MovieRepository) {
                 if (movies.isNotEmpty()) {
                     val randomMovie = movies.random()
                     Result.success(randomMovie)
-
             }
                 else{
                     Result.failure(Exception("No movies found"))
