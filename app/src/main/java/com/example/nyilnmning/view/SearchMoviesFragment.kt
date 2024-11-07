@@ -1,4 +1,4 @@
-package com.example.nyilnmning
+package com.example.nyilnmning.view
 
 import android.os.Bundle
 import android.util.Log
@@ -7,17 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nyilnmning.R
 import com.example.nyilnmning.repository.MovieRepository
 import com.example.nyilnmning.service.DisplayService
-import com.example.nyilnmning.view.PopularMoviesAdapterList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -17,5 +17,9 @@
     <string name="disliked">Dislike</string>
     <string name="movie">Movie</string>
     <string name="Search">Search movie</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 
 </resources>

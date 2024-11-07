@@ -1,7 +1,6 @@
-package com.example.nyilnmning
+package com.example.nyilnmning.view
 
 import android.app.Application
-import com.example.nyilnmning.viewmodel.AppModule
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
