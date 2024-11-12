@@ -1,9 +1,14 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+
 }
+
+
 
 android {
     namespace = "com.example.nyilnmning"
@@ -16,6 +21,9 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+
     }
 
     buildTypes {
@@ -27,14 +35,21 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
+
 }
+
+
 
 dependencies {
     implementation(libs.retrofit)
@@ -46,18 +61,30 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.litert.support.api)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
-    implementation (libs.androidx.appcompat)
-    implementation (libs.androidx.constraintlayout.v214)
-    implementation (libs.material)
-    // Dagger dependencies
+    implementation("com.github.bumptech.glide:glide:4.12.0") {
+        exclude(group = "com.google.code.findbugs", module = "jsr305")
+    }
+
+    implementation(libs.androidx.appcompat) {
+        exclude(group = "androidx.annotation")
+    }
+
+    implementation(libs.material) {
+        exclude(group = "androidx.annotation")
+    }
+    implementation ("androidx.fragment:fragment-ktx:1.8.4")
+
+
+    implementation(libs.androidx.constraintlayout.v214)
+    implementation(libs.material)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.junit)
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
-
-    // Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.52")
     kapt("com.google.dagger:hilt-android-compiler:2.52")
 }

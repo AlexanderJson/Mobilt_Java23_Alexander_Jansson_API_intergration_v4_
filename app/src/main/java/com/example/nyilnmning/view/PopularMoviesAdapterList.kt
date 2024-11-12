@@ -35,6 +35,7 @@ class PopularMoviesAdapterList(private var movieList: List<Movie>) : RecyclerVie
         holder.title.text = movie.title
         holder.overview.text = movie.overview
         holder.genre.text = Genre.genreToString(movie.genre_ids)
+        Log.d("bindholder:", holder.title.text.toString())
 
         holder.addButton.setOnClickListener {
             Log.d("HOLDER:", movie.title)
@@ -49,5 +50,7 @@ class PopularMoviesAdapterList(private var movieList: List<Movie>) : RecyclerVie
     fun updateMovies(newMovies: List<Movie>){
         movieList = newMovies
         notifyDataSetChanged()
+        Log.d("list:", movieList.toString())
+
     }
 }

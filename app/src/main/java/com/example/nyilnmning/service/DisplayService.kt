@@ -51,8 +51,10 @@ class DisplayService @Inject constructor(private val repo: MovieRepository) {
             try{
                 val movies = discoverMovies().getOrNull() ?: emptyList()
                 if (movies.isNotEmpty()) {
+                    Log.e("random", "Error: ${movies}")
                     val randomMovie = movies.random()
                     Result.success(randomMovie)
+
             }
                 else{
                     Result.failure(Exception("No movies found"))

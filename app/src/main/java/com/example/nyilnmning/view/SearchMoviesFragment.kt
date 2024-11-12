@@ -16,9 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nyilnmning.R
 import com.example.nyilnmning.repository.MovieRepository
 import com.example.nyilnmning.service.DisplayService
+import com.example.nyilnmning.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import androidx.fragment.app.viewModels
+
 
 @AndroidEntryPoint
 class SearchMoviesFragment :  Fragment() {
@@ -33,7 +36,7 @@ class SearchMoviesFragment :  Fragment() {
 
     private lateinit var movieAdapter: PopularMoviesAdapterList
 
-
+    private val searchViewModel: SearchViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -53,29 +56,34 @@ class SearchMoviesFragment :  Fragment() {
 
 
 
+        observeViewModel()
+        setupSearch()
         setupRecyclerView(view)
-        sendSearch()
 
     }
 
-    private fun sendSearch() {
+
+
+    private fun observeViewModel(){
+        searchViewModel.movies.observe(viewLifecycleOwner){movies ->
+            if (movies != null){
+                movieAdapter.updateMovies(movies)
+
+                Log.d("SearchMoviesFragment", "Movies received: $movies")
+            }else {
+                Log.e("Viewmodel Search", "error etc")
+            }
+        }
+    }
+
+    private fun setupSearch(){
         val queryField = view?.findViewById<EditText>(R.id.edit_query)
-        var query = "";
-
-        view?.findViewById<Button>(R.id.searchBtn)?.setOnClickListener {
-            if (queryField != null) {
-                query =  queryField.text.toString()
-                lifecycleScope.launch {
-                   val result =  service.searchMovie(query)
-                    result.onSuccess { movies ->
-                        movieAdapter.updateMovies(movies)
-
-                    }.onFailure { error ->
-                        Log.e("MainActivity", "Error: ${error.message}")
-                    }
-                }
-            };
-        };
+        view?.findViewById<Button>(R.id.searchBtn)?.setOnClickListener{
+            val query = queryField?.text.toString()
+            if (query.isNotEmpty()){
+                searchViewModel.searchMovies(query)
+            }
+        }
     }
 
     private fun setupRecyclerView(view: View){
@@ -86,7 +94,6 @@ class SearchMoviesFragment :  Fragment() {
         recyclerView.adapter = movieAdapter
 
     }
-
 
 //    private fun randomMovie() {
 //

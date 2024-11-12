@@ -10,10 +10,14 @@ import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.nyilnmning.R
 import com.example.nyilnmning.service.DisplayService
+import com.example.nyilnmning.viewmodel.RandomViewModel
+import com.example.nyilnmning.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +30,7 @@ class RandomMovieFragment :  Fragment() {
 
     @Inject
     lateinit var service: DisplayService
-
+    val randomViewModel: RandomViewModel by viewModels()
 
 
 
@@ -62,30 +66,63 @@ class RandomMovieFragment :  Fragment() {
 
 
     }
-        private fun randomMovie(){
-            viewLifecycleOwner.lifecycleScope.launch {
+    private fun randomMovie() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            randomViewModel.getRandomMovie()
+
+            randomViewModel.movies.observe(viewLifecycleOwner) { movies ->
                 val title = view?.findViewById<TextView>(R.id.titleHeader)
                 val synopsis = view?.findViewById<TextView>(R.id.randomOverviewText)
-                val result = service.getRandomMovie()
-                result.onSuccess { movie ->
-                    Log.d("Main", "Movie: ${movie.title}")
-                    if (title != null) {
-                        title.text = movie.title
-                    }
-                    if (synopsis != null) {
-                        synopsis.text = movie.overview
-                    }
-                    val url = "https://image.tmdb.org/t/p/w500${movie.poster_path}"
-                    view?.let {
-                        Glide.with(this@RandomMovieFragment)
-                            .load(url)
-                            .placeholder(R.drawable.ic_launcher_background)
-                            .error(R.drawable.ic_launcher_background)
-                            .into(it.findViewById(R.id.graphImage))
-                    }
+                movies?.forEach { movie ->
+                Log.d("From movie random", "Movie: ${movie.title}")
+                if (title != null) {
+                    title.text = movie.title
+                }
+                if (synopsis != null) {
+                    synopsis.text = movie.overview
+                }
+                val url = "https://image.tmdb.org/t/p/w500${movie.poster_path}"
+                view?.let {
+                    Glide.with(this@RandomMovieFragment)
+                        .load(url)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_background)
+                        .into(it.findViewById(R.id.graphImage))
                 }
             }
-
         }
+        }
+    }}
 
-}
+    /*
+
+        private fun randomMovie(){
+            Log.d("rANDOMin", "iniiit")
+            randomViewModel.movies.observe(viewLifecycleOwner) { movies ->
+                val title = view?.findViewById<TextView>(R.id.titleHeader)
+                val synopsis = view?.findViewById<TextView>(R.id.randomOverviewText)
+                movies?.forEach { movie ->
+                Log.d("rANDOMin", "Movie: ${movie.title}")
+                     if (title != null) {
+                         title.text = movie.title
+                     }
+                     if (synopsis != null) {
+                         synopsis.text = movie.overview
+                     }
+                     val url = "https://image.tmdb.org/t/p/w500${movie.poster_path}"
+                     view?.let {
+                         Glide.with(this@RandomMovieFragment)
+                             .load(url)
+                             .placeholder(R.drawable.ic_launcher_background)
+                             .error(R.drawable.ic_launcher_background)
+                             .into(it.findViewById(R.id.graphImage))
+                     }
+                 }
+
+                }
+            }
+*/
+
+
+
+
