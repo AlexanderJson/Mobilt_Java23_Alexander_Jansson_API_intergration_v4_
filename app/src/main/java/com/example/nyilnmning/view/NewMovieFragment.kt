@@ -50,6 +50,7 @@ class NewMovieFragment :  Fragment() {
             insets
         }
         getTrending(view)
+        Log.d("new movie", "d")
 
         val nextBtn = view.findViewById<Button>(R.id.nextBtn)
         nextBtn.setOnClickListener{

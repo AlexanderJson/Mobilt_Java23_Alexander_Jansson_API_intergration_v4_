@@ -19,7 +19,6 @@ class PopularMoviesAdapterList(private var movieList: List<Movie>) : RecyclerVie
         val title: TextView = itemView.findViewById(R.id.label_title)
         val overview: TextView = itemView.findViewById(R.id.label_overview)
         val genre: TextView = itemView.findViewById(R.id.label_genre)
-        val addButton: ImageButton = itemView.findViewById(R.id.addMovie)
     }
 
 
@@ -37,9 +36,7 @@ class PopularMoviesAdapterList(private var movieList: List<Movie>) : RecyclerVie
         holder.genre.text = Genre.genreToString(movie.genre_ids)
         Log.d("bindholder:", holder.title.text.toString())
 
-        holder.addButton.setOnClickListener {
-            Log.d("HOLDER:", movie.title)
-        }
+
     }
 
     // storlek på lista

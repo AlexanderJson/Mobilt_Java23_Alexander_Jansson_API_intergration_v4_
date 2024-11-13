@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
 
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, RandomMovieFragment())
+                .replace(R.id.fragmentContainer, NewMovieFragment())
                 .commit()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -37,14 +37,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
 
-                R.id.nav_randomMovie -> {
-                    val fragment = RandomMovieFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer, fragment)
-                        .addToBackStack(null)
-                        .commit()
-                    true
-                }
                 R.id.nav_popularMovies -> {
                     val fragment = NewMovieFragment()
                     supportFragmentManager.beginTransaction()
@@ -53,15 +45,23 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-
+                R.id.nav_randomMovie -> {
+                    val fragment = RandomMovieFragment()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                    true
+                }
                 R.id.nav_searchMovie -> {
-                val fragment = SearchMoviesFragment()
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment)
-                    .addToBackStack(null)
-                    .commit()
-                true
-            }
+                    val fragment = SearchMoviesFragment()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                    true
+                }
+
                 else -> {
                     false
                 }

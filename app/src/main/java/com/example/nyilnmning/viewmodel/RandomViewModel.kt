@@ -35,8 +35,10 @@ class RandomViewModel @Inject constructor(private val service: DisplayService) :
 
      fun getMovie() {
         viewModelScope.launch {
+            Log.e("Fetching the random movie", "")
             val fetchedMovies = service.getRandomMovie()
             val movie = fetchedMovies.getOrNull()
+
             movieLiveData.value = movie?.let { listOf(it) } ?: emptyList()
             if (movie != null) {
                 Log.e("random", "Error: ${movie.title}")
