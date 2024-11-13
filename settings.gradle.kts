@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "nyIlnämning"
 include(":app")
- 
+include(":mylibrary")
+include(":mylibrary2")
