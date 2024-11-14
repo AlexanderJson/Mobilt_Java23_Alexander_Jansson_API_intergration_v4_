@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.example.bankapp.Users.Authorization.AuthActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

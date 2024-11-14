@@ -1,5 +1,7 @@
 package com.example.nyilnmning.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,13 +13,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.example.bankapp.Users.service.UserService
 import com.example.nyilnmning.R
 import com.example.nyilnmning.service.DisplayService
 import com.example.nyilnmning.viewmodel.RandomViewModel
-import com.example.nyilnmning.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +27,8 @@ import javax.inject.Inject
 class RandomMovieFragment :  Fragment() {
 
 
-
+    @Inject
+    lateinit var userService: UserService
 
     @Inject
     lateinit var service: DisplayService
@@ -54,8 +56,6 @@ class RandomMovieFragment :  Fragment() {
 
 
 
-
-
         val nextBtn = view.findViewById<Button>(R.id.nextBtn)
         nextBtn.setOnClickListener{
                 randomMovie()
@@ -66,6 +66,9 @@ class RandomMovieFragment :  Fragment() {
 
 
     }
+
+
+
     private fun randomMovie() {
         viewLifecycleOwner.lifecycleScope.launch {
             randomViewModel.getRandomMovie()

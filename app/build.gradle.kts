@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id ("com.google.gms.google-services")
 
 }
 
@@ -63,6 +64,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.litert.support.api)
     testImplementation(libs.junit)
+    implementation ("androidx.security:security-crypto:1.1.0-alpha03")
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-analytics")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.github.bumptech.glide:glide:4.12.0") {
@@ -78,6 +82,9 @@ dependencies {
     }
     implementation ("androidx.fragment:fragment-ktx:1.8.4")
 
+    implementation ("com.google.firebase:firebase-auth:22.1.1")
+    implementation ("com.google.firebase:firebase-database:20.1.0")
+    implementation ("com.google.firebase:firebase-firestore:24.7.1")
 
     implementation(libs.androidx.constraintlayout.v214)
     implementation(libs.material)
