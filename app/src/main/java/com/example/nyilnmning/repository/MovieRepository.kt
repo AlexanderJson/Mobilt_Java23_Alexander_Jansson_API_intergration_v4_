@@ -25,10 +25,10 @@ class MovieRepository @Inject constructor(private val api: ApiInterface) {
        }
    }
 
-    suspend fun discoverMovies(): Result<List<Movie>> {
+    suspend fun discoverMovies(genres:String? = null, sortBy: String? = null, limit: Int? = null): Result<List<Movie>> {
         return withContext(Dispatchers.IO){
             try {
-                val response = api.getDiscover(apiKey)
+                val response = api.getDiscover(apiKey,genres = genres)
                 Result.success(response.results)
             } catch (e: Exception){
                 Result.failure(e)

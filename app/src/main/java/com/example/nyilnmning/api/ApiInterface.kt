@@ -12,6 +12,8 @@ interface ApiInterface {
     Kan göra på bästa lediga tråd, plus hoppar av tråd när den inväntar data (suspend)
     * */
 
+    // TMBD Api
+
     @GET("movie/popular")
     suspend fun getPopular(
         @Query("api_key") apiKey: String
@@ -30,5 +32,6 @@ interface ApiInterface {
         @Query("api_key") apiKey: String,
         @Query("query") query: String
     ): MovieResponse
+
 
 }

@@ -6,27 +6,54 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object ApiUtil {
 
-    private const val URL =  "https://api.themoviedb.org/3/"
+    private const val tmbd_URL =  "https://api.themoviedb.org/3/"
+    private const val recommendation_URL =  "http://10.0.2.2:5000/"
 
+    @TMBDRetrofit
     @Singleton
     @Provides
-    fun launchRetrofit(): Retrofit {
+    fun launchRetrofitTMBD(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(URL)
+            .baseUrl(tmbd_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @RecommendationRetrofit
+    @Singleton
+    @Provides
+    fun launchRetrofitRecommendations(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(recommendation_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideApiInterface(retrofit: Retrofit): ApiInterface{
-        return retrofit.create(ApiInterface::class.java)
+    fun provideApiInterface(@TMBDRetrofit retrofitTMBD: Retrofit): ApiInterface{
+        return retrofitTMBD.create(ApiInterface::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideRecommendationInterface(@RecommendationRetrofit retrofitRecommendations: Retrofit): ApiInterfaceRecommendations{
+        return retrofitRecommendations.create(ApiInterfaceRecommendations::class.java)
+    }
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class TMBDRetrofit
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class RecommendationRetrofit
 
 }

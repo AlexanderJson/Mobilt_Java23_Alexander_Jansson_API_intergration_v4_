@@ -1,20 +1,38 @@
 package com.example.nyilnmning.service
 
 import android.util.Log
-import com.example.nyilnmning.api.ApiInterface
+import com.example.nyilnmning.model.Genre
 import com.example.nyilnmning.model.Movie
 import com.example.nyilnmning.repository.MovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.math.log
 
 @Singleton
-class DisplayService @Inject constructor(private val repo: MovieRepository) {
+class DisplayService @Inject constructor(private val repo: MovieRepository,private val recommendService: RecommendationService) {
 
-    private suspend fun discoverMovies(): Result<List<Movie>> {
+
+        suspend fun recommendByGenre(){
+        val topRatedGenres = recommendService.ratingPercentage()
+        val genreIds = topRatedGenres.map { Genre.genreMap.entries.find { entry -> entry.value == it.first }?.key }
+        Log.d("Genre ID: ", genreIds.toString())
+
+        if(genreIds.isNotEmpty()){
+            val genreQuery = genreIds.joinToString(",")
+            Log.d("Rating id,", genreQuery)
+
+            try{
+                val recommendedMovies = repo.discoverMovies(genres = genreQuery,null,4)
+                Log.d("Rating fetched: ", recommendedMovies.toString())
+            }catch (e: Exception){
+                Log.e("Rating Error", "Error message: ", e)
+            }
+        }
+
+    }
+
+    private suspend fun discoverMovies(genres: String?): Result<List<Movie>> {
         return withContext(Dispatchers.IO){
             try {
                 val response = repo.discoverMovies()
@@ -49,7 +67,7 @@ class DisplayService @Inject constructor(private val repo: MovieRepository) {
     suspend fun getRandomMovie(): Result<Movie> {
         return withContext(Dispatchers.IO){
             try{
-                val movies = discoverMovies().getOrNull() ?: emptyList()
+                val movies = discoverMovies(genres = null).getOrNull() ?: emptyList()
                 if (movies.isNotEmpty()) {
                     Log.e("random", "Error: ${movies}")
                     val randomMovie = movies.random()

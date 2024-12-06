@@ -30,6 +30,7 @@ class UserService @Inject constructor(private val userRepository: UserRepository
 
 
 
+
     suspend fun fetchAllUsers() {
         val result = userRepository.getAllUsers()
         result.onSuccess { users ->

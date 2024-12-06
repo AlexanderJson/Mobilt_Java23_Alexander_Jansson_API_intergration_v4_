@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_searchMovie -> {
-                    val fragment = SearchMoviesFragment()
+                    val fragment = RecommendedFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, fragment)
                         .addToBackStack(null)
