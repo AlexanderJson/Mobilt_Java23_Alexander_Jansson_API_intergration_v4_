@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
@@ -19,7 +20,9 @@ import com.example.nyilnmning.service.DisplayService
 import com.example.nyilnmning.service.RecommendationService
 import com.example.nyilnmning.viewmodel.RandomViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,13 +45,14 @@ class RecommendedFragment :  Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        ratingPercentage()
         ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        ratingPercentage()
-        recommendGenre()
+
     }
 
     private fun recommendGenre() {
@@ -61,8 +65,27 @@ class RecommendedFragment :  Fragment() {
     private fun ratingPercentage() {
         viewLifecycleOwner.lifecycleScope.launch {
             val ratings = service.ratingPercentage()
-            Log.d("Recommendation", ratings.toString())
+            val topGenre = ratings.maxByOrNull { it.second }
+            withContext(Dispatchers.Main){
+                if (topGenre != null) {
+                    val (genre, percentage) = topGenre
+                    initGenreUI(genre,percentage)
+                    Log.d("Recommendation1", ratings.toString())
+                    Log.d("Recommendation1", "genre: $genre - percentage: $percentage")
+
+                } else {
+                    Log.d("Error", "Couldnt fetch rated genres")
+                }
+            }
+
         }
+    }
+
+    private fun initGenreUI(genre: String, percentage: Double){
+        val genreTextView = view?.findViewById<TextView>(R.id.label_genre)
+        genreTextView?.text = genre
+        val genrePercent = view?.findViewById<TextView>(R.id.percent_genre)
+        genrePercent?.text = percentage.toString()
     }
 }
 

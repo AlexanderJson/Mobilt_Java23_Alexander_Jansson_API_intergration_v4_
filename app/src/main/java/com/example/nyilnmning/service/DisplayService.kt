@@ -13,6 +13,7 @@ import javax.inject.Singleton
 class DisplayService @Inject constructor(private val repo: MovieRepository,private val recommendService: RecommendationService) {
 
 
+    //TODO : a choice of seperating genre: Adventorous (value 3 at 60%), Safe (value 1 at 70%), Explorer (value 2 at 60%), Crazy (value 1,2,3 + 4,5 random)
         suspend fun recommendByGenre(){
         val topRatedGenres = recommendService.ratingPercentage()
         val genreIds = topRatedGenres.map { Genre.genreMap.entries.find { entry -> entry.value == it.first }?.key }
@@ -69,7 +70,7 @@ class DisplayService @Inject constructor(private val repo: MovieRepository,priva
             try{
                 val movies = discoverMovies(genres = null).getOrNull() ?: emptyList()
                 if (movies.isNotEmpty()) {
-                    Log.e("random", "Error: ${movies}")
+                    Log.e("random", "Error: $movies")
                     val randomMovie = movies.random()
                     Result.success(randomMovie)
 
