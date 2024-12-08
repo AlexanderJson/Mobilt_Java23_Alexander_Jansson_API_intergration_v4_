@@ -52,7 +52,6 @@ class RecommendedFragment :  Fragment() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
     }
 
     private fun recommendGenre() {
@@ -77,7 +76,6 @@ class RecommendedFragment :  Fragment() {
                     Log.d("Error", "Couldnt fetch rated genres")
                 }
             }
-
         }
     }
 

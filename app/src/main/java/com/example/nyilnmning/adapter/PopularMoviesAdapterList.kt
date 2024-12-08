@@ -1,10 +1,9 @@
-package com.example.nyilnmning.view
+package com.example.nyilnmning.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nyilnmning.R

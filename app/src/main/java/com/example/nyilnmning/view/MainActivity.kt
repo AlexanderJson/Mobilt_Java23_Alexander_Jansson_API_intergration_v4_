@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
 
                 R.id.nav_popularMovies -> {
-                    val fragment = NewMovieFragment()
+                    val fragment = PosterFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, fragment)
                         .addToBackStack(null)

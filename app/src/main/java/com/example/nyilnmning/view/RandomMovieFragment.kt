@@ -95,7 +95,8 @@ class RandomMovieFragment :  Fragment() {
             }
         }
         }
-    }}
+    }
+}
 
     /*
 
