@@ -1,7 +1,5 @@
 package com.example.nyilnmning.view
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.bankapp.Users.service.UserService
 import com.example.nyilnmning.R
-import com.example.nyilnmning.service.DisplayService
+import com.example.nyilnmning.frontpage.DisplayService
 import com.example.nyilnmning.viewmodel.RandomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

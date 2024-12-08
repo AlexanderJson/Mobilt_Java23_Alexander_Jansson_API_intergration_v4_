@@ -3,12 +3,9 @@ package com.example.nyilnmning.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.nyilnmning.model.Movie
-import com.example.nyilnmning.repository.MovieRepository
-import com.example.nyilnmning.service.DisplayService
+import com.example.nyilnmning.frontpage.DisplayService
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,12 +14,12 @@ class TrendingViewModel @Inject constructor(private val service: DisplayService)
     val movieLiveData = MutableLiveData<List<Movie>?>()
     val movies: LiveData<List<Movie>?> get() = movieLiveData
 
-    fun getMovie() {
-        viewModelScope.launch {
-            val fetchedMovies = service.trendingMovies()
-            movieLiveData.value = fetchedMovies.getOrNull()
-        }
-    }
+//    fun getMovie() {
+//        viewModelScope.launch {
+//            val fetchedMovies = service.trendingMovies()
+//            movieLiveData.value = fetchedMovies.getOrNull()
+//        }
+//    }
 
 }
 

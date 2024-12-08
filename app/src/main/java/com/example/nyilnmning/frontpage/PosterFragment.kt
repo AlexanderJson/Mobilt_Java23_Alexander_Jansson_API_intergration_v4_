@@ -1,4 +1,4 @@
-package com.example.nyilnmning.view
+package com.example.nyilnmning.frontpage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.nyilnmning.R
-import com.example.nyilnmning.adapter.ViewpageAdapter
 import com.example.nyilnmning.viewmodel.PosterImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class PosterFragment :  Fragment() {
 
     @Inject
-    lateinit var adapter: ViewpageAdapter
+    lateinit var adapter: FrontPageAdapter
     val vm: PosterImageViewModel by viewModels()
 
     override fun onCreateView(
@@ -49,18 +49,8 @@ class PosterFragment :  Fragment() {
 
     private fun frontPageTrending() {
         viewLifecycleOwner.lifecycleScope.launch {
-
-            // init a request that adds movie data to LiveData list
-            vm.getTrending()
-
-            // create movi
-            vm.movies.observe(viewLifecycleOwner) { movies ->
-                movies?.let {
-                    val urls = it.map { movie ->
-                        "https://image.tmdb.org/t/p/w500${movie.poster_path}"
-                    }
-                    adapter.setImages(urls)
-                }
+            vm.trendingFrontPage.collectLatest { pagingData ->
+                adapter.submitData(pagingData)
             }
         }
     }

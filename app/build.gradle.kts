@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.litert.support.api)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     implementation ("androidx.security:security-crypto:1.1.0-alpha03")
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
@@ -72,6 +73,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0") {
         exclude(group = "com.google.code.findbugs", module = "jsr305")
     }
+
+    implementation ("androidx.paging:paging-runtime:3.1.1")
 
     implementation(libs.androidx.appcompat) {
         exclude(group = "androidx.annotation")

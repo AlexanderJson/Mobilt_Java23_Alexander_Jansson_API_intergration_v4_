@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nyilnmning.R
-import com.example.nyilnmning.repository.MovieRepository
-import com.example.nyilnmning.service.DisplayService
+import com.example.nyilnmning.frontpage.MovieRepository
+import com.example.nyilnmning.frontpage.DisplayService
 import com.example.nyilnmning.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

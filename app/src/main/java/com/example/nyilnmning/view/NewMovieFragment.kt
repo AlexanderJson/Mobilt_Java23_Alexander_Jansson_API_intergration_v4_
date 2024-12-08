@@ -14,8 +14,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.nyilnmning.R
-import com.example.nyilnmning.repository.MovieRepository
-import com.example.nyilnmning.service.DisplayService
+import com.example.nyilnmning.frontpage.MovieRepository
+import com.example.nyilnmning.frontpage.DisplayService
 import com.example.nyilnmning.viewmodel.RandomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

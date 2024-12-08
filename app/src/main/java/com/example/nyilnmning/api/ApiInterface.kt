@@ -16,7 +16,8 @@ interface ApiInterface {
 
     @GET("movie/popular")
     suspend fun getPopular(
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int
     ): MovieResponse
 
     @GET("discover/movie")

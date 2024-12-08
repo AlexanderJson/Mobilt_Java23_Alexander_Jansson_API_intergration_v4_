@@ -21,6 +21,7 @@ nd4jNativePlatform = "1.0.0-beta7"
 ndk = "23.1.7779620"
 retrofit = "2.9.0"
 litertSupportApi = "1.0.1"
+recyclerview = "1.1.0"
 
 [libraries]
 androidx-appcompat-v161 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
@@ -49,6 +50,7 @@ nd4j-native-platform = { module = "org.nd4j:nd4j-native-platform", version.ref =
 ndk = { module = "com.google.android:ndk", version.ref = "ndk" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 litert-support-api = { group = "com.google.ai.edge.litert", name = "litert-support-api", version.ref = "litertSupportApi" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

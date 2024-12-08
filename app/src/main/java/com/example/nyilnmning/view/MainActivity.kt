@@ -11,9 +11,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.bankapp.Users.Authorization.AuthActivity
 import com.example.nyilnmning.Authorization.SharedPreferencesUtil
 import com.example.nyilnmning.R
+import com.example.nyilnmning.frontpage.PosterFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
