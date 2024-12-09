@@ -2,7 +2,9 @@ package com.example.bankapp.Users.repository
 
 
 import android.util.Log
+import com.example.nyilnmning.model.Movie
 import com.example.nyilnmning.model.User
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.Dispatchers
@@ -17,12 +19,25 @@ class UserRepository  @Inject constructor() {
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val usersCollection = db.collection("users")
+    private val userIDDoc = db.collection("userID").document("userID")
 
 
-    suspend fun registerUser(user: User){
+
+
+
+
+    suspend fun registerUser(user: User): Result<String>{
         return withContext(Dispatchers.IO){
             try {
-                usersCollection.add(user).await()
+                db.runTransaction{ transaction ->
+                    val snapshot = transaction.get(userIDDoc)
+                    val currentID = snapshot.getLong("value") ?: 0
+
+                    val newID = currentID + 1
+                    transaction.update(userIDDoc, "value", newID)
+                    user.userid = newID.toInt()
+                    usersCollection.add(user)
+                }
                 Result.success("Registration succeded!")
             } catch (e: Exception){
                 Log.e("UserRepository", "Error registering user", e)

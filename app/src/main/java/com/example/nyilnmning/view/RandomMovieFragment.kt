@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.bankapp.Users.service.UserService
 import com.example.nyilnmning.R
-import com.example.nyilnmning.frontpage.DisplayService
+import com.example.nyilnmning.service.DisplayService
 import com.example.nyilnmning.viewmodel.RandomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

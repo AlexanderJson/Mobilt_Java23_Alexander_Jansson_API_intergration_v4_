@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nyilnmning.model.Movie
-import com.example.nyilnmning.frontpage.DisplayService
+import com.example.nyilnmning.service.DisplayService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,14 +16,14 @@ class SearchViewModel @Inject constructor(private val repo: DisplayService) : Vi
         val movies: LiveData<List<Movie>?> get() = movieLiveData
 
         fun searchMovies(query: String) {
-        viewModelScope.launch {
-            val fetchedMovies = repo.searchMovie(query)
-            if (fetchedMovies.isSuccess){
-                movieLiveData.value = fetchedMovies.getOrNull()
-            } else{
-                movieLiveData.value = emptyList()
-            }
-        }
+//        viewModelScope.launch {
+//            val fetchedMovies = repo.searchMovie(query)
+//            if (fetchedMovies.isSuccess){
+//                movieLiveData.value = fetchedMovies.getOrNull()
+//            } else{
+//                movieLiveData.value = emptyList()
+//            }
+//        }
     }
 
 

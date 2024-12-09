@@ -2,8 +2,11 @@ package com.example.nyilnmning.service
 
 import android.content.Context
 import android.util.Log
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.bankapp.Users.repository.UserRepository
 import com.example.nyilnmning.model.Genre
+import com.example.nyilnmning.model.Movie
 import com.example.nyilnmning.model.User
 import com.example.nyilnmning.repository.RecommendationRepository
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +18,28 @@ import javax.inject.Singleton
 class RecommendationService @Inject constructor(private val recommendationRepository: RecommendationRepository) {
 
 
+    private fun getUserID(context: Context): Int? {
+        val masterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+        val sp = EncryptedSharedPreferences.create(
+            context,
+            "MyPrefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+        val userIDString =  sp.getString("token", null)
+        return userIDString?.toIntOrNull()
+    }
 
+    suspend fun likeMovie(movie: Movie, context: Context){
+        val userID = getUserID(context)
+        Log.d("userid", userID.toString())
+        if (userID != null) {
+            recommendationRepository.registerLike(movie,userID)
+        }
+    }
 
     // Extra logik här senare!
     suspend fun ratingPercentage(): List<Pair<String,Double>> {
@@ -36,11 +60,11 @@ class RecommendationService @Inject constructor(private val recommendationReposi
                     Log.d("Rating",genreName)
                     genreName to percent
                 }
+                Log.d("From recommendation", ": Genre ID: $topRatedGenres")
 
                 topRatedGenres.forEach{(genre,percent) ->
                     Log.d("Rating success", "Top genres: $genre, $percent%")
                 }
-
                 return@withContext topRatedGenres
             } catch (e: Exception) {
                 Log.e("Rating Percentage Failure", "Failed to fetch!")

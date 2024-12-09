@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/nav_randomMovie"
-        android:title="@string/random"
+        android:title="@string/Recommended"
         android:icon="@drawable/baseline_movie_filter_24"
         />
 

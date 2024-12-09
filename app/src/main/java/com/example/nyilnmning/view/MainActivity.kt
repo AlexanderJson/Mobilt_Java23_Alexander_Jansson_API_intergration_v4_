@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.bankapp.Users.Authorization.AuthActivity
 import com.example.nyilnmning.Authorization.SharedPreferencesUtil
 import com.example.nyilnmning.R
-import com.example.nyilnmning.frontpage.PosterFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "User: ${token} is logged in!", Toast.LENGTH_SHORT).show()
             if (savedInstanceState == null) {
                 // Add the default fragment
-                val defaultFragment = NewMovieFragment()
+                val defaultFragment = TrendingMoviesFragment()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, defaultFragment)
                     .commit()
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
 
                 R.id.nav_popularMovies -> {
-                    val fragment = PosterFragment()
+                    val fragment = TrendingMoviesFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, fragment)
                         .addToBackStack(null)
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_randomMovie -> {
-                    val fragment = RandomMovieFragment()
+                    val fragment = RecommendedMoviesFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, fragment)
                         .addToBackStack(null)

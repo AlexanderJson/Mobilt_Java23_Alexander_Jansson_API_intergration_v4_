@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nyilnmning.model.Movie
-import com.example.nyilnmning.frontpage.DisplayService
+import com.example.nyilnmning.service.DisplayService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

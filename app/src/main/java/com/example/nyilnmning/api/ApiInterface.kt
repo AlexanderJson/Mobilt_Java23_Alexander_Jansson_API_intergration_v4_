@@ -14,6 +14,9 @@ interface ApiInterface {
 
     // TMBD Api
 
+
+
+
     @GET("movie/popular")
     suspend fun getPopular(
         @Query("api_key") apiKey: String,
@@ -21,17 +24,18 @@ interface ApiInterface {
     ): MovieResponse
 
     @GET("discover/movie")
-    suspend fun getDiscover(
+    suspend fun getRecommended(
         @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
+        @Query("with_genres") genres: String? = null,
         @Query("query") query: String? = null,
         @Query("sort_by") sortBy: String? = null,
-        @Query("with_genres") genres: String? = null,
     ): MovieResponse
 
     @GET("search/movie")
     suspend fun searchMovie(
         @Query("api_key") apiKey: String,
-        @Query("query") query: String
+        @Query("query") query: String,
     ): MovieResponse
 
 

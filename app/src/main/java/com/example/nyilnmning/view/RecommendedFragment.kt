@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.nyilnmning.R
-import com.example.nyilnmning.frontpage.DisplayService
+import com.example.nyilnmning.service.DisplayService
 import com.example.nyilnmning.service.RecommendationService
 import com.example.nyilnmning.viewmodel.RandomViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,6 @@ class RecommendedFragment :  Fragment() {
     lateinit var service: RecommendationService
     @Inject
     lateinit var movieService: DisplayService
-    val randomViewModel: RandomViewModel by viewModels()
 
 
     override fun onCreateView(

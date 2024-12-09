@@ -8,16 +8,24 @@ import javax.inject.Inject
 
 class MoviePagingSrc  @Inject constructor(
     private val api: ApiInterface,
-    private val apiKey: String
+    private val apiKey: String,
+    private val query: SearchType,
+    private val genres: String? = null
 ) : PagingSource<Int, Movie>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
+
+
+
+    override suspend fun load(params: LoadParams<Int>, ): LoadResult<Int, Movie> {
         // which page 1 of X, starts with page 1
         val page = params.key ?: 1
         return try {
-            val response = api.getPopular(apiKey, page)
+            val response = when(query){
+                SearchType.popular -> api.getPopular(apiKey,page)
+                SearchType.recommended -> api.getRecommended(apiKey,page, genres)
+            }
             LoadResult.Page(
-                data = response.results, // fetched list of movies
+                data = response.results,
                 prevKey = if (page == 1) null else page - 1,
                 nextKey = if (response.results.isEmpty()) null else page + 1
             )
@@ -26,11 +34,19 @@ class MoviePagingSrc  @Inject constructor(
         }
     }
 
+
     override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
         return state.anchorPosition?.let { position ->
             state.closestPageToPosition(position)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(position)?.nextKey?.minus(1)
         }
+    }
+
+    enum class SearchType{
+        popular,
+        recommended,
+//        search,
+//        random,
     }
 }
 

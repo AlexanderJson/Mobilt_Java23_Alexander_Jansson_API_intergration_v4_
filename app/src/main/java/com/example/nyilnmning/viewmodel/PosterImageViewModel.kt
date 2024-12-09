@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.nyilnmning.model.Movie
-import com.example.nyilnmning.frontpage.DisplayService
+import com.example.nyilnmning.service.DisplayService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -22,6 +22,14 @@ class PosterImageViewModel @Inject constructor(private val service: DisplayServi
     val trendingFrontPage: Flow<PagingData<Movie>> = service.getTrendingFrontpage()
         .cachedIn(viewModelScope)
 
+
+    val recommendedFrontPage: Flow<PagingData<Movie>> = service.recommendByGenre()
+        .cachedIn(viewModelScope)
+
+}
+
+
+
 //    fun getTrending(){
 //        viewModelScope.launch {
 //            val fetchedMovies = service.trendingMovies()
@@ -35,5 +43,3 @@ class PosterImageViewModel @Inject constructor(private val service: DisplayServi
 //            movieLiveData.value = fetchedMovies.getOrNull()
 //        }
 //    }
-
-}

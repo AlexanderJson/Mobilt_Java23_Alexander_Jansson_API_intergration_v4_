@@ -1,0 +1,12 @@
+lägg till:
+
+om inte rekommenderade filmer finns: ta random film + notis
+
+statiskt fält: kommentarer, gilla (dubbelklick), info (namn, overview), where to watch (dela plats, få info kring netflix, prime osv från land)
+fält tar in filmen på skärm som parameter
+
+rekommendationer: hantera så action väljs först, sedan drama, sedan aventure
+
+Gör mer avancerade sökningar annars - med actor, director osv.
+
+Import optimizing?

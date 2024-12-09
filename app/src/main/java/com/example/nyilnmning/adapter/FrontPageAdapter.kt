@@ -1,5 +1,6 @@
-package com.example.nyilnmning.frontpage
+package com.example.nyilnmning.adapter
 
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
@@ -9,14 +10,15 @@ import com.bumptech.glide.Glide
 import com.example.nyilnmning.model.Movie
 import javax.inject.Inject
 
-class FrontPageAdapter @Inject constructor() : 
+class FrontPageAdapter @Inject constructor() :
     PagingDataAdapter<Movie, FrontPageAdapter.MovieViewHolder>(diffUtilCallback()) {
-   
-   
+
+
     class MovieViewHolder(val imageView: ImageView) : RecyclerView.ViewHolder(imageView)
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
+
         Glide.with(holder.imageView.context)
             .load("https://image.tmdb.org/t/p/w500${movie?.poster_path}")
             .into(holder.imageView)
@@ -32,6 +34,24 @@ class FrontPageAdapter @Inject constructor() :
         }
         return MovieViewHolder(imageView)
     }
+
+    fun likeMovie(position: Int): Movie? {
+        val movie = getItem(position)
+        return if (movie != null) {
+            movie
+        } else {
+            Log.d("MovieLike", "No movie found to like")
+            null
+        }
+    }
+//        return if (movie != null){
+//            mapOf(
+//                "movieID" to movie.id,
+//                "genreIDs" to movie.genre_ids.getOrNull(0),
+//                "voteAVG" to movie.vote_average,
+//                "popularity" to movie.popularity
+//            )
+
 
 
     class diffUtilCallback : DiffUtil.ItemCallback<Movie>() {  // diffUtil calculates redraws in UI to only redraw what is needed, good to save memory for managing reloading etc. Since it doesnt redraw content that already exists

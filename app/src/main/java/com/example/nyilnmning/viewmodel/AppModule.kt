@@ -1,7 +1,7 @@
 package com.example.nyilnmning.viewmodel
 
 import com.example.nyilnmning.api.ApiInterface
-import com.example.nyilnmning.frontpage.MovieRepository
+import com.example.nyilnmning.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

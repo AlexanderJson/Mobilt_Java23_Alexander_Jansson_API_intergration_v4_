@@ -9,8 +9,6 @@ import com.example.bankapp.Users.repository.UserRepository
 import com.example.nyilnmning.model.Movie
 import com.example.nyilnmning.model.User
 import com.example.nyilnmning.view.MainActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -45,15 +43,16 @@ class UserService @Inject constructor(private val userRepository: UserRepository
 
 
 
+
     suspend fun authorize(username: String, password: String, context: Context): Result<User?> {
         return try {
-            Log.d("UserViewModel Service", username + "  " + password)
+            Log.d("UserViewModel Service", "$username  $password")
             val result = userRepository.getUser(username)
             if (result.isSuccess) {
                 val user = result.getOrNull()
                 if (user != null && user.password == password) {
 
-                    val token = user.username
+                    val token = user.userid
                     val masterKey = MasterKey.Builder(context)
                         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                         .build()
@@ -65,7 +64,7 @@ class UserService @Inject constructor(private val userRepository: UserRepository
                         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
                     )
-                    sharedPreferences.edit().putString("token", token).apply()
+                    sharedPreferences.edit().putString("token", token.toString()).apply()
                     Log.d("LoginFragment", " Token: $token")
 
 
