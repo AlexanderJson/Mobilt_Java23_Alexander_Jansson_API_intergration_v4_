@@ -1,9 +1,11 @@
 package com.example.nyilnmning.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -11,10 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import com.example.bankapp.Users.service.UserService
 import com.example.nyilnmning.R
 import com.example.nyilnmning.adapter.FrontPageAdapter
-import com.example.nyilnmning.service.RecommendationService
 import com.example.nyilnmning.viewmodel.PosterImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -22,13 +22,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TrendingMoviesFragment :  Fragment() {
+class RandomsMovieFragment :  Fragment() {
 
     @Inject
     lateinit var adapter: FrontPageAdapter
-    private val vm: PosterImageViewModel by viewModels()
-    @Inject
-    lateinit var recommendService: RecommendationService
+    val vm: PosterImageViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,15 +42,16 @@ class TrendingMoviesFragment :  Fragment() {
         val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
         viewPager.adapter = adapter
 
-
-        frontPageTrending()
         val likeBtn = view.findViewById<ImageButton>(R.id.likeBtn)
 
-        likeBtn.setOnClickListener {
+        likeBtn.setOnClickListener{
             val position = viewPager.currentItem
-            likeMovie(position)
+            val movie = adapter.getItemId(position)
+            Log.d("movie", movie.toString())
         }
 
+
+        randomMovie()
         ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -60,18 +60,9 @@ class TrendingMoviesFragment :  Fragment() {
 
     }
 
-    private fun likeMovie(position: Int){
+    private fun randomMovie() {
         viewLifecycleOwner.lifecycleScope.launch {
-            val likedMovie = adapter.likeMovie(position)
-            if (likedMovie != null) {
-                recommendService.likeMovie(likedMovie, requireContext())
-            }
-        }
-    }
-
-    private fun frontPageTrending() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            vm.trendingFrontPage.collectLatest { pagingData ->
+            vm.randomFrontpage.collectLatest { pagingData ->
                 adapter.submitData(pagingData)
             }
         }

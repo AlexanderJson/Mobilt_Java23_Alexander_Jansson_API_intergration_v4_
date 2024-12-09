@@ -34,6 +34,9 @@ class PosterImageViewModel @Inject constructor(
     val recommendedFrontPage: Flow<PagingData<Movie>> = service.recommendByGenre(context)
         .cachedIn(viewModelScope)
 
+    val randomFrontpage: Flow<PagingData<Movie>> = service.getRandomMovies()
+        .cachedIn(viewModelScope)
+
 }
 
 

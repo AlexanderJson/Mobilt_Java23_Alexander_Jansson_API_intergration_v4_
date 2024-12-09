@@ -34,6 +34,7 @@ class UserRepository  @Inject constructor() {
                     val currentID = snapshot.getLong("value") ?: 0
 
                     val newID = currentID + 1
+                    Log.d("firestoreLOG", "currentID: $currentID Current snapshot: $snapshot  Current new ID: $newID")
                     transaction.update(userIDDoc, "value", newID)
                     user.userid = newID.toInt()
                     usersCollection.add(user)

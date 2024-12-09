@@ -73,6 +73,15 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
+
+                R.id.nav_randomMovie -> {
+                    val fragment = RandomsMovieFragment()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                    true
+                }
                 R.id.nav_profile -> {
                     val fragment = RecommendedFragment()
                     supportFragmentManager.beginTransaction()
