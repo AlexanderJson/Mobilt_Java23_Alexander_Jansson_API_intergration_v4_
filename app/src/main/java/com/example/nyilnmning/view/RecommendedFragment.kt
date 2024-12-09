@@ -63,7 +63,10 @@ class RecommendedFragment :  Fragment() {
             withContext(Dispatchers.Main){
                 if (topGenre != null) {
                     val (genre, percentage) = topGenre
-                    initGenreUI(genre,percentage)
+                    val genreTextView = view?.findViewById<TextView>(R.id.label_genre)
+                    genreTextView?.text = "Your favorite genre: $genre"
+                    val genrePercent = view?.findViewById<TextView>(R.id.percent_genre)
+                    genrePercent?.text = "$percentage % recommendation rate"
                     Log.d("Recommendation1", ratings.toString())
                     Log.d("Recommendation1", "genre: $genre - percentage: $percentage")
 
@@ -74,11 +77,6 @@ class RecommendedFragment :  Fragment() {
         }
     }
 
-    private fun initGenreUI(genre: String, percentage: Double){
-        val genreTextView = view?.findViewById<TextView>(R.id.label_genre)
-        genreTextView?.text = genre
-        val genrePercent = view?.findViewById<TextView>(R.id.percent_genre)
-        genrePercent?.text = percentage.toString()
-    }
+
 }
 

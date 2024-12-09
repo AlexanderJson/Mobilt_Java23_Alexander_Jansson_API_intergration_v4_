@@ -11,15 +11,15 @@
         />
 
     <item
-        android:id="@+id/nav_randomMovie"
+        android:id="@+id/nav_recommended"
         android:title="@string/Recommended"
-        android:icon="@drawable/baseline_movie_filter_24"
+        android:icon="@drawable/baseline_recommend_24"
         />
 
     <item
-        android:id="@+id/nav_searchMovie"
-        android:title="@string/Search"
-        android:icon="@drawable/baseline_saved_search_24"
+        android:id="@+id/nav_profile"
+        android:title="@string/profile"
+        android:icon="@drawable/baseline_manage_accounts_24"
         />
 
     <item

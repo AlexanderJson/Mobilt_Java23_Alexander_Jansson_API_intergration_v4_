@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-                R.id.nav_randomMovie -> {
+                R.id.nav_recommended -> {
                     val fragment = RecommendedMoviesFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, fragment)
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-                R.id.nav_searchMovie -> {
+                R.id.nav_profile -> {
                     val fragment = RecommendedFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, fragment)

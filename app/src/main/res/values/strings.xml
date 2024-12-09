@@ -23,5 +23,6 @@
     <string name="register">Register</string>
     <string name="review">Review</string>
     <string name="like_button">like_button</string>
+    <string name="profile">Profile</string>
 
 </resources>
