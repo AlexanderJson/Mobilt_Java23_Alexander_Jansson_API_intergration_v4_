@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.nyilnmning.R
 import com.example.nyilnmning.adapter.FrontPageAdapter
+import com.example.nyilnmning.service.RecommendationService
 import com.example.nyilnmning.viewmodel.PosterImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -27,6 +28,8 @@ class RecommendedMoviesFragment :  Fragment() {
     @Inject
     lateinit var adapter: FrontPageAdapter
     val vm: PosterImageViewModel by viewModels()
+    @Inject
+    lateinit var recommendService: RecommendationService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,15 +45,13 @@ class RecommendedMoviesFragment :  Fragment() {
         val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
         viewPager.adapter = adapter
 
+
         val likeBtn = view.findViewById<ImageButton>(R.id.likeBtn)
 
-        likeBtn.setOnClickListener{
+        likeBtn.setOnClickListener {
             val position = viewPager.currentItem
-            val movie = adapter.getItemId(position)
-            Log.d("movie", movie.toString())
+            likeMovie(position)
         }
-
-
         frontPageTrending()
         ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -58,6 +59,15 @@ class RecommendedMoviesFragment :  Fragment() {
             insets
         }
 
+    }
+
+    private fun likeMovie(position: Int){
+        viewLifecycleOwner.lifecycleScope.launch {
+            val likedMovie = adapter.likeMovie(position)
+            if (likedMovie != null) {
+                recommendService.likeMovie(likedMovie, requireContext())
+            }
+        }
     }
 
     private fun frontPageTrending() {

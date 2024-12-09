@@ -19,7 +19,7 @@ class MoviePagingSrc  @Inject constructor(
     override suspend fun load(params: LoadParams<Int>, ): LoadResult<Int, Movie> {
         // which page 1 of X, starts with page 1
         val page = params.key ?: 1
-        val recommendedPage = (1..50).random() //TODO optimize
+        val recommendedPage = (1..20).random() //TODO optimize
         val randomPage = (1..500).random()
         return try {
             val response = when(query){
