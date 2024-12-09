@@ -15,7 +15,6 @@ interface ApiInterfaceRecommendations {
 
     // RecommendationFilter REST Api
 
-    // fix arguments here when changing python code to send userid
     @POST("/recommend/genre")
     suspend fun getRecommendations(
         @Body user: User

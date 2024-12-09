@@ -1,5 +1,6 @@
 package com.example.nyilnmning.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
@@ -20,6 +21,7 @@ class PosterImageViewModel @Inject constructor(
     private val service: DisplayService,
     application: Application) : AndroidViewModel(application)
 {
+        @SuppressLint("StaticFieldLeak")
         val context: Context = application.applicationContext
     val movieLiveData = MutableLiveData<List<Movie>?>()
     val movies: LiveData<List<Movie>?> get() = movieLiveData
