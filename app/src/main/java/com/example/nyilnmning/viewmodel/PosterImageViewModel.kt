@@ -1,5 +1,8 @@
 package com.example.nyilnmning.viewmodel
 
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,8 +16,11 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class PosterImageViewModel @Inject constructor(private val service: DisplayService) : ViewModel()
+class PosterImageViewModel @Inject constructor(
+    private val service: DisplayService,
+    application: Application) : AndroidViewModel(application)
 {
+        val context: Context = application.applicationContext
     val movieLiveData = MutableLiveData<List<Movie>?>()
     val movies: LiveData<List<Movie>?> get() = movieLiveData
 
@@ -23,7 +29,7 @@ class PosterImageViewModel @Inject constructor(private val service: DisplayServi
         .cachedIn(viewModelScope)
 
 
-    val recommendedFrontPage: Flow<PagingData<Movie>> = service.recommendByGenre()
+    val recommendedFrontPage: Flow<PagingData<Movie>> = service.recommendByGenre(context)
         .cachedIn(viewModelScope)
 
 }

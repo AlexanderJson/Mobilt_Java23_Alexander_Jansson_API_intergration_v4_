@@ -42,30 +42,32 @@ class RecommendationService @Inject constructor(private val recommendationReposi
     }
 
     // Extra logik här senare!
-    suspend fun ratingPercentage(): List<Pair<String,Double>> {
+    suspend fun ratingPercentage(context: Context): List<Pair<String,Double>> {
         return withContext(Dispatchers.IO) {
             try {
-                val favoriteGenres = recommendationRepository.allGenreRatings()
+                val userID = getUserID(context)
 
-                val topGenres = favoriteGenres.map { (genre, percent)  ->
+                val favoriteGenres = userID?.let { recommendationRepository.allGenreRatings(it) }
+
+                val topGenres = favoriteGenres?.map { (genre, percent)  ->
                     genre.toDouble() to percent.replace("%", "").toDouble()
                 }
-                    .sortedByDescending { it.second }
-                    .take(3)
+                    ?.sortedByDescending { it.second }
+                    ?.take(3)
 
                 val genreData = Genre.genreMap
 
-                val topRatedGenres = topGenres.map { (genreId, percent) ->
+                val topRatedGenres = topGenres?.map { (genreId, percent) ->
                     val genreName = genreData[genreId.toInt()] ?: "Unknown"
                     Log.d("Rating",genreName)
                     genreName to percent
                 }
                 Log.d("From recommendation", ": Genre ID: $topRatedGenres")
 
-                topRatedGenres.forEach{(genre,percent) ->
+                topRatedGenres?.forEach{ (genre,percent) ->
                     Log.d("Rating success", "Top genres: $genre, $percent%")
                 }
-                return@withContext topRatedGenres
+                return@withContext topRatedGenres!!
             } catch (e: Exception) {
                 Log.e("Rating Percentage Failure", "Failed to fetch!")
                 emptyList()

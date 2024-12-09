@@ -5,6 +5,7 @@ import com.example.nyilnmning.api.ApiInterface
 import com.example.nyilnmning.api.ApiInterfaceRecommendations
 import com.example.nyilnmning.model.Movie
 import com.example.nyilnmning.model.RatingData
+import com.example.nyilnmning.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -37,10 +38,13 @@ class RecommendationRepository @Inject constructor(private val api: ApiInterface
         }
     }
 
-    suspend fun allGenreRatings(): Map<String, String> {
+    suspend fun allGenreRatings(userID: Int): Map<String, String> {
         return withContext(Dispatchers.IO) {
             try {
-                val recommendations = api.getRecommendations()
+                val user = User(
+                    userid = userID
+                )
+                val recommendations = api.getRecommendations(user)
                 Log.d("Rating Percentage Response: ", recommendations.toString())
                 recommendations
             } catch (e: Exception) {

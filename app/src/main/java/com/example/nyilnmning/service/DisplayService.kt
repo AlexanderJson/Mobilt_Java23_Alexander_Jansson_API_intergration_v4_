@@ -1,5 +1,6 @@
 package com.example.nyilnmning.service
 
+import android.content.Context
 import android.util.Log
 import androidx.paging.PagingData
 import com.example.nyilnmning.repository.MovieRepository
@@ -21,8 +22,8 @@ class DisplayService @Inject constructor(private val repo: MovieRepository, priv
     }
 
     //TODO : a choice of seperating genre: Adventorous (value 3 at 60%), Safe (value 1 at 70%), Explorer (value 2 at 60%), Crazy (value 1,2,3 + 4,5 random)
-      fun recommendByGenre(): Flow<PagingData<Movie>>  = flow {
-        val topRatedGenres = recommendService.ratingPercentage()
+      fun recommendByGenre(context: Context): Flow<PagingData<Movie>>  = flow {
+        val topRatedGenres = recommendService.ratingPercentage(context)
         val genreIds =
             topRatedGenres.map { Genre.genreMap.entries.find { entry -> entry.value == it.first }?.key }
         Log.d("From display service: Genre ID: ", genreIds.toString())

@@ -2,6 +2,7 @@ package com.example.nyilnmning.api
 
 import com.example.nyilnmning.model.MovieResponse
 import com.example.nyilnmning.model.RatingData
+import com.example.nyilnmning.model.User
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -15,8 +16,11 @@ interface ApiInterfaceRecommendations {
     // RecommendationFilter REST Api
 
     // fix arguments here when changing python code to send userid
-    @GET("/recommend/genre")
-    suspend fun getRecommendations(): Map<String,String>
+    @POST("/recommend/genre")
+    suspend fun getRecommendations(
+        @Body user: User
+    ): Map<String, String>
+
 
 
     @POST("/add_rating")

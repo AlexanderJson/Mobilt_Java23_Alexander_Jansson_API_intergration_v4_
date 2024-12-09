@@ -51,14 +51,14 @@ class RecommendedFragment :  Fragment() {
 
     private fun recommendGenre() {
         viewLifecycleOwner.lifecycleScope.launch {
-            val ratings = movieService.recommendByGenre()
+            val ratings = movieService.recommendByGenre(requireContext())
             Log.d("Recommendation", ratings.toString())
         }
     }
 
     private fun ratingPercentage() {
         viewLifecycleOwner.lifecycleScope.launch {
-            val ratings = service.ratingPercentage()
+            val ratings = service.ratingPercentage(requireContext())
             val topGenre = ratings.maxByOrNull { it.second }
             withContext(Dispatchers.Main){
                 if (topGenre != null) {
