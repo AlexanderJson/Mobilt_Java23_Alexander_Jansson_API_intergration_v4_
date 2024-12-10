@@ -24,16 +24,9 @@ An Android App for movie recommendations. Using the TMBD API and Python to creat
 ## Features
 - See  popular movies, random movies and recommended movies
 - "Like" movies and get recommendations
+- Login required with firebase/firestore
 
----
 
-## Endpoints
-
-### General
-- **Ping**: `GET /`
-
-### Recommendations
-- **Get Recommendations (POST)**:
 
 
 REST API Python repository for personalised recommendation algorithm: 
