@@ -41,10 +41,8 @@ class RecommendationRepository @Inject constructor(private val api: ApiInterface
     suspend fun allGenreRatings(userID: Int): Map<String, String> {
         return withContext(Dispatchers.IO) {
             try {
-                val user = User(
-                    userid = userID
-                )
-                val recommendations = api.getRecommendations(user)
+                val userIdPayload = mapOf("userid" to userID)
+                val recommendations = api.getRecommendations(userIdPayload)
                 Log.d("Rating Percentage Response: ", recommendations.toString())
                 recommendations
             } catch (e: Exception) {

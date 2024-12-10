@@ -17,7 +17,7 @@ interface ApiInterfaceRecommendations {
 
     @POST("/recommend/genre")
     suspend fun getRecommendations(
-        @Body user: User
+        @Body userIdPayload: Map<String, Int>
     ): Map<String, String>
 
 
@@ -26,5 +26,8 @@ interface ApiInterfaceRecommendations {
     suspend fun addRating(
         @Body ratingData: RatingData
     ): Response<Void>
+
+    @GET("/")
+    suspend fun ping(): Response<Void>
 
 }

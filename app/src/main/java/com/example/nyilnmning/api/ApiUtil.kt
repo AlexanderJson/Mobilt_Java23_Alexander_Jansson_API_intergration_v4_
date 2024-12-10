@@ -14,7 +14,7 @@ import javax.inject.Singleton
 object ApiUtil {
 
     private const val tmbd_URL =  "https://api.themoviedb.org/3/"
-    private const val recommendation_URL =  "http://10.0.2.2:5000/"
+    private const val recommendation_URL =  "https://recommendation.eu.pythonanywhere.com"
 
     @TMBDRetrofit
     @Singleton
